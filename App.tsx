@@ -238,7 +238,7 @@ const App: React.FC = () => {
                 onClick={playSound}
                 className="text-4xl md:text-6xl font-black pulsate text-white cursor-pointer uppercase tracking-tighter drop-shadow-[0_0_20px_rgba(255,255,255,1)] select-none"
               >
-                Give Treat Or Mahim'll be Exposed! 🔥
+                Give Treat Otherwise Mahim'll be Exposed! 🔥
               </p>
               <p className="mt-8 text-slate-400 text-sm font-bold">WARNING: SQUAD IS WATCHING. TREAT IS MANDATORY.</p>
               <p className="mt-2 text-slate-500 text-xs">© 2024 Mahim's Birthday Squad. No Mahims were harmed during the making of this prank.</p>
