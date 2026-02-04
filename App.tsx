@@ -14,7 +14,7 @@ const CELEBRATION_SOUND_URL = 'https://assets.mixkit.co/sfx/preview/mixkit-cheer
 // The images provided for the "Expose" section
 const EXPOSE_IMAGES = [
   "image1.png",
-  "input_file_1.png"
+  "image2.png"
 ];
 
 const App: React.FC = () => {
