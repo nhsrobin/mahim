@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect, useCallback, useRef } from 'react';
 import { AppState } from './types';
 import Cake from './components/Cake';
@@ -11,7 +10,7 @@ const ALERT_SOUND_URL = 'https://assets.mixkit.co/sfx/preview/mixkit-emergency-a
 // Celebration sound for the cake cutting
 const CELEBRATION_SOUND_URL = 'https://assets.mixkit.co/sfx/preview/mixkit-cheering-crowd-loud-602.mp3';
 
-// The images provided for the "Expose" section
+// The images provided for the "Expose" section, updated to match user's manual change
 const EXPOSE_IMAGES = [
   "image1.png",
   "image2.png"
