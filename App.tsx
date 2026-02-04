@@ -10,10 +10,10 @@ const ALERT_SOUND_URL = 'https://assets.mixkit.co/sfx/preview/mixkit-emergency-a
 // Celebration sound for the cake cutting
 const CELEBRATION_SOUND_URL = 'https://assets.mixkit.co/sfx/preview/mixkit-cheering-crowd-loud-602.mp3';
 
-// The images provided for the "Expose" section, updated to match user's manual change
+// Path updated with './' to ensure root lookup
 const EXPOSE_IMAGES = [
-  "image1.png",
-  "image2.png"
+  "./image1.png",
+  "./image2.png"
 ];
 
 const App: React.FC = () => {
@@ -21,21 +21,18 @@ const App: React.FC = () => {
   const [timeLeft, setTimeLeft] = useState(10);
   const alertAudioRef = useRef<HTMLAudioElement | null>(null);
 
-  // Function to play the custom sound.mp3 for generic clicks
   const playSound = useCallback(() => {
     const audio = new Audio(CLICK_SOUND_URL);
     audio.volume = 0.6;
     audio.play().catch(err => console.debug("Click sound blocked:", err));
   }, []);
 
-  // Function to play celebration sound
   const playCelebration = useCallback(() => {
     const audio = new Audio(CELEBRATION_SOUND_URL);
     audio.volume = 0.5;
     audio.play().catch(err => console.debug("Celebration sound blocked:", err));
   }, []);
 
-  // Effect to handle the red alert sound and shaking state
   useEffect(() => {
     if (appState === 'EXPOSED') {
       if (!alertAudioRef.current) {
@@ -87,7 +84,7 @@ const App: React.FC = () => {
   }, []);
 
   const handleCutCake = () => {
-    playCelebration(); // Specific celebration sound for cake
+    playCelebration();
     setAppState('CELEBRATING');
     triggerConfetti('celebration');
     triggerConfetti('bomb');
@@ -120,7 +117,6 @@ const App: React.FC = () => {
   const handleNowClick = () => {
     playSound();
     setAppState('EXPOSED');
-    // Smooth scroll to gallery
     setTimeout(() => {
       document.getElementById('gallery-section')?.scrollIntoView({ behavior: 'smooth' });
     }, 100);
@@ -133,7 +129,6 @@ const App: React.FC = () => {
   return (
     <div className={`min-h-screen text-slate-100 flex flex-col items-center selection:bg-pink-500/30 transition-colors duration-500 ${appState === 'EXPOSED' ? 'bg-red-950 shake-it' : 'bg-slate-950'}`}>
       
-      {/* Header Section */}
       <header className="pt-20 pb-10 text-center px-4">
         <h1 className="text-5xl md:text-7xl font-black mb-4 tracking-tighter glow-text leading-tight">
           Happy 18th Birthday, <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-500 via-pink-500 to-rose-500">Mahim!</span>
@@ -143,10 +138,8 @@ const App: React.FC = () => {
         </p>
       </header>
 
-      {/* Main Content Area */}
       <main className="flex-1 w-full max-w-4xl px-6 flex flex-col items-center justify-start py-10 space-y-16">
         
-        {/* Cake Section */}
         <section className="flex flex-col items-center space-y-10">
           <Cake isCut={appState !== 'INITIAL'} />
           
@@ -170,7 +163,6 @@ const App: React.FC = () => {
           )}
         </section>
 
-        {/* Gift Modal (First Popup) */}
         <Modal isOpen={appState === 'GIFT_PENDING'} title="Special Delivery! 🎈">
           <p className="text-center mb-8">
             Mahim, the wait is over! Your legendary 18th birthday gift is ready for pickup. 
@@ -183,7 +175,6 @@ const App: React.FC = () => {
           </button>
         </Modal>
 
-        {/* Prank Modal (The 18+ Twist) */}
         <Modal isOpen={appState === 'PRANK'} title="Welcome to Adulthood! 🔞">
           <div className="space-y-6">
             <p className="text-center italic text-slate-400">
@@ -216,7 +207,6 @@ const App: React.FC = () => {
           </div>
         </Modal>
 
-        {/* Final Gallery Section */}
         {appState === 'EXPOSED' && (
           <section id="gallery-section" className="w-full animate-in slide-in-from-bottom duration-1000">
             <div className="flex items-center justify-center gap-4 mb-10">
@@ -233,6 +223,7 @@ const App: React.FC = () => {
                   <img 
                     src={imgUrl} 
                     alt={`Mahim Memories ${i + 1}`}
+                    onError={(e) => console.error(`Failed to load image: ${imgUrl}`)}
                     className="w-full h-full object-cover filter grayscale group-hover:grayscale-0 transition-all duration-500"
                   />
                   <div className="absolute inset-0 bg-red-600/20 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
@@ -256,7 +247,6 @@ const App: React.FC = () => {
         )}
       </main>
 
-      {/* Floating Particles Background (CSS only) */}
       <div className="fixed inset-0 pointer-events-none -z-10 overflow-hidden">
         {[...Array(15)].map((_, i) => (
           <div 
