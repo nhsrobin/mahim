@@ -13,7 +13,7 @@ const CELEBRATION_SOUND_URL = 'https://assets.mixkit.co/sfx/preview/mixkit-cheer
 
 // The images provided for the "Expose" section
 const EXPOSE_IMAGES = [
-  "input_file_0.png",
+  "image1.png",
   "input_file_1.png"
 ];
 
